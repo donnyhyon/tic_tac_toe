@@ -1,6 +1,12 @@
+require 'stringio'
+
 def creates_new_grid
     $board =  "\n 1 | 2 | 3 \n 4 | 5 | 6 \n 7 | 8 | 9\n" 
     print $board
+end
+
+def get_input
+    $stdin.gets.chomp
 end
 
 def player_move(grid , player_marker, position)
@@ -10,6 +16,7 @@ def player_move(grid , player_marker, position)
         raise "it doesnt exist"
     end
 end
+
 
 
 describe 'creating the game board' do
@@ -31,4 +38,22 @@ describe 'game rules' do
         expect{ player_move($board, 'X', '2') }.to raise_error("it doesnt exist")
     end
 end
+
+describe "get_user_input" do
+    $stdin = StringIO.new("2")
+
+    it "returns the player's input" do
+      expect(get_input).to eq("2")
+    end
+  end
+
+
+  describe "integration tests" do
+    it "passes player input into player move to put down marker" do
+        
+    end
+  end
+
+
+
 
