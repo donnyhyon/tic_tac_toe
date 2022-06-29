@@ -17,6 +17,20 @@ def player_move(grid , player_marker, position)
     end
 end
 
+def x_count(grid)
+    grid.count('X')
+end
+
+def o_count(grid)
+    grid.count('O')
+end
+
+def who_goes_next(x_count, o_count)
+    if x_count > o_count then
+        return 'O'
+    else return 'X'
+    end
+  end
 
 
 describe 'creating the game board' do
@@ -40,20 +54,33 @@ describe 'game rules' do
 end
 
 describe "get_user_input" do
-    $stdin = StringIO.new("2")
-
     it "returns the player's input" do
-      expect(get_input).to eq("2")
+        $stdin = StringIO.new("2")
+        expect(get_input).to eq("2")
     end
   end
-
 
   describe "integration tests" do
     it "passes player input into player move to put down marker" do
-        
+        $stdin = StringIO.new("5")
+        user_input = get_input
+        creates_new_grid
+        expect{ player_move($board, 'X', user_input) }.to output("\n 1 | 2 | 3 \n 4 | X | 6 \n 7 | 8 | 9\n").to_stdout
     end
   end
 
+describe 'swapping players' do
+    test_board = "\n 1 | O | 3 \n 4 | X | 6 \n 7 | X | 9\n"
+    it 'counts number of X & O occurences' do
+        expect(x_count(test_board)).to eq(2)
+        expect(o_count(test_board)).to eq(1)
+    end
 
+    it 'knows O to go when X has more counts' do
+       expect(who_goes_next(2,1)).to eq('O') 
+    end
 
-
+    it 'knows X to go if both counts are equal' do
+        expect(who_goes_next(2,2)).to eq('X') 
+     end
+end
