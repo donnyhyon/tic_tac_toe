@@ -25,6 +25,18 @@ describe 'playing the game ' do
         player_turn = game1.player_move(board, 'O', '2')
         expect(player_turn).to eq("\n 1 | O | 3 \n 4 | 5 | 6 \n 7 | 8 | 9\n")
     end
+
+    it 'returns "game over" when all the tiles are filled' do
+        board = game1.creates_new_grid
+        playing_game = game1.play_game(board)
+        expect(playing_game).to eq("Game Over")
+# QUESTION- how do we create a test for this one - we could just add the below... 
+# def play_game(board)
+#     "Game Over"
+# end
+    end
+
+
 end
 
 describe 'game rules' do
