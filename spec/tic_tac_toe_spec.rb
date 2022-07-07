@@ -35,8 +35,6 @@ describe 'playing the game ' do
 #     "Game Over"
 # end
     end
-
-
 end
 
 describe 'game rules' do
